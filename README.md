@@ -22,13 +22,11 @@ NovaMart powers a full-featured online shopping experience — including product
 |-----------|--------------|
 | **Backend Framework** | Spring Boot 3.x |
 | **Security** | Spring Security, JWT |
-| **Database** | PostgreSQL / MySQL |
+| **Database** | MongoDB |
 | **ORM** | Spring Data JPA, Hibernate |
-| **Build Tool** | Maven / Gradle |
+| **Build Tool** | Maven |
 | **API Docs** | Springdoc OpenAPI (Swagger UI) |
 | **Testing** | JUnit 5, Mockito |
 | **Containerization** | Docker, Docker Compose |
 
 ---
-
-## 🗂️ Project Structure
