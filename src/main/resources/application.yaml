@@ -1,40 +1,79 @@
+application:
+    rest:
+        context-path: /api
+        allowed-origins: ${ALLOWED_ORIGINS:http://localhost:4200, http://localhost:4201}
+    configuration-data:
+        datalist-collection: ${MONGODB_COLLECTION_DATALIST:datalist}
+        datalistrelation-collection: ${MONGODB_COLLECTION_DATALISTRELATION:datalistrelation}
+        import-datalists : ${IMPORT_DATALISTS_ENABLED:true}
+    security:
+      enabled: ${SECURITY_ENABLED:true}
+    environment: ${ENVIRONMENT:LOCAL}
+springdoc:
+    swagger-ui:
+        path: /api/swagger-ui.html
+        page-title: Novamart Service APIs
+        page-description: List of security enabled endpoints available for Novamart Service
+        enabled: ${SWAGGER-UI_ENABLED:true}
+    show-actuator: true
+
 spring:
-  application:
-    name: novamart-service
-  
-  # MongoDB Configuration
-  data:
-    mongodb:
-      host: localhost
-      port: 27017
-      database: novamartdb
-      authentication-database: admin
-      auto-index-creation: true
+    data:
+        mongodb:
+            auto-index-creation: true
+            database: ${MONGODB_DATABASE:novamart_service}
+            uri: ${MONGODB_URI:mongodb://localhost:27017}
+    servlet:
+        multipart:
+            enabled: true
+            max-file-size: 5500KB
+            max-request-size: 5500KB
+    jackson:
+        serialization:
+            indent-output: true 
+    gson:
+        serialization:
+            pretty-printing: true  
+    security:
+        user:
+            name: admin
+            password: admin123
 
-# Server Configuration
-server:
-  port: 8080
-  servlet:
-    context-path: /api
-
-# Actuator Configuration
 management:
+  info:
+    env:
+      enabled: true
   endpoints:
     web:
       exposure:
-        include: health,info,metrics,prometheus
+        include: info, health
   endpoint:
     health:
-      show-details: always
+      probes:
+        enabled: true
+      show-details: when_authorized
+      group:
+        readiness:
+          include: readinessState, ssl, mongo
+        liveness:
+          include: livenessState, ping
+  health:
+    readinessstate:
+      enabled: true
+    livenessstate:
+      enabled: true
+info:
+  application:
+    name: novamart-service
+    description: backend for pnovamart-service
+    version: '@project.version@'
+logging:
+  level:
+    org:
+      springframework:
+        security: INFO
 
-# Custom Application Properties
-app:
-  security:
-    jwt:
-      secret: ${JWT_SECRET:your-default-jwt-secret-key-minimum-256-bits}
-      expiration: 86400000  # 24 hours in milliseconds
-  cors:
-    allowed-origins: http://localhost:3000
-    allowed-methods: GET,POST,PUT,DELETE,OPTIONS
-    allowed-headers: Authorization,Content-Type
-    max-age: 3600
+mongock:
+    enabled: ${MONGOCK_ENABLED:true}
+    migration-scan-package: com.novamart.changelogs
+    transaction-strategy: change-unit
