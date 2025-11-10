@@ -1,0 +1,134 @@
+[ {
+  "id" : "Category",
+  "options" : [ {
+    "value" : "ELEC",
+    "label" : "Electronics",
+    "additionalText" : "Mobiles, laptops, accessories, etc."
+  }, {
+    "value" : "FASH",
+    "label" : "Fashion",
+    "additionalText" : "Clothing, footwear, and accessories."
+  }, {
+    "value" : "HOME",
+    "label" : "Home & Kitchen",
+    "additionalText" : "Appliances and home essentials."
+  }, {
+    "value" : "BOOK",
+    "label" : "Books",
+    "additionalText" : "Fiction, non-fiction, academic materials."
+  }, {
+    "value" : "GROC",
+    "label" : "Groceries",
+    "additionalText" : "Daily essentials and packaged food."
+  } ]
+}, {
+  "id" : "Brand",
+  "options" : [ {
+    "value" : "APL",
+    "label" : "Apple",
+    "additionalText" : "Electronics and mobile devices."
+  }, {
+    "value" : "SMSNG",
+    "label" : "Samsung",
+    "additionalText" : "Consumer electronics and mobiles."
+  }, {
+    "value" : "NKE",
+    "label" : "Nike",
+    "additionalText" : "Sportswear and accessories."
+  }, {
+    "value" : "ADDS",
+    "label" : "Adidas",
+    "additionalText" : "Sportswear and footwear."
+  }, {
+    "value" : "SNY",
+    "label" : "Sony",
+    "additionalText" : "Audio, video, and gaming products."
+  } ]
+}, {
+  "id" : "PaymentMethod",
+  "options" : [ {
+    "value" : "COD",
+    "label" : "Cash on Delivery",
+    "additionalText" : "Pay with cash upon delivery."
+  }, {
+    "value" : "CARD",
+    "label" : "Credit/Debit Card",
+    "additionalText" : "Pay securely with your card."
+  }, {
+    "value" : "UPI",
+    "label" : "UPI",
+    "additionalText" : "Instant payment using UPI apps."
+  }, {
+    "value" : "NB",
+    "label" : "Net Banking",
+    "additionalText" : "Online bank payment method."
+  } ]
+}, {
+  "id" : "OrderStatus",
+  "options" : [ {
+    "value" : "PENDING",
+    "label" : "Pending",
+    "additionalText" : "Order is yet to be processed."
+  }, {
+    "value" : "PAID",
+    "label" : "Paid",
+    "additionalText" : "Payment completed successfully."
+  }, {
+    "value" : "SHIPPED",
+    "label" : "Shipped",
+    "additionalText" : "Order has been shipped."
+  }, {
+    "value" : "DELIVERED",
+    "label" : "Delivered",
+    "additionalText" : "Order has reached the customer."
+  }, {
+    "value" : "CANCELLED",
+    "label" : "Cancelled",
+    "additionalText" : "Order has been cancelled."
+  } ]
+}, {
+  "id" : "UserRole",
+  "options" : [ {
+    "value" : "SELLER",
+    "label" : "seller",
+    "additionalText" : "Can list products and manage orders."
+  }, {
+    "value" : "BUYER",
+    "label" : "buyer",
+    "additionalText" : "Can browse, purchase and review products."
+  } ]
+}, {
+  "id" : "ShippingMethod",
+  "options" : [ {
+    "value" : "STD",
+    "label" : "Standard Delivery",
+    "additionalText" : "Delivered within 5-7 business days."
+  }, {
+    "value" : "EXP",
+    "label" : "Express Delivery",
+    "additionalText" : "Delivered within 2-3 business days."
+  }, {
+    "value" : "ONE",
+    "label" : "One-Day Delivery",
+    "additionalText" : "Delivered the next business day."
+  } ]
+}, {
+  "id" : "ReturnReason",
+  "options" : [ {
+    "value" : "DAMAGED",
+    "label" : "Damaged Product",
+    "additionalText" : "Item was received damaged or defective."
+  }, {
+    "value" : "WRONG",
+    "label" : "Wrong Product",
+    "additionalText" : "Received a different product than ordered."
+  }, {
+    "value" : "QUALITY",
+    "label" : "Quality Issue",
+    "additionalText" : "Product quality did not meet expectations."
+  }, {
+    "value" : "OTHER",
+    "label" : "Other",
+    "additionalText" : "Any other reason for returning."
+  } ]
+} ]
