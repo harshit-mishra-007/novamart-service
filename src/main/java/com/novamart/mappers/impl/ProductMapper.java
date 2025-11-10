@@ -1,5 +1,7 @@
 package com.novamart.mappers.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.stereotype.Component;
 import com.novamart.dtos.product.ProductDetailsDto;
 import com.novamart.entities.product.ProductDetails;
@@ -32,5 +34,21 @@ public class ProductMapper implements GenericMapper<ProductDetailsDto, ProductDe
 		productDetails.setStock(productDetailsDto.getStock());
 		productDetails.setActive(productDetailsDto.isActive());
 		return productDetails;
+	}
+	
+	public List<ProductDetailsDto> toDtoList(List<ProductDetails> productDetailsList){
+		List<ProductDetailsDto> productDetailsDtoList = new ArrayList<>();
+		productDetailsList.forEach(product -> {
+			productDetailsDtoList.add(toDto(product));
+		});
+		return productDetailsDtoList;
+	}
+	
+	public List<ProductDetails> toEntityList(List<ProductDetailsDto> productDetailsDtoList){
+		List<ProductDetails> productDetailsList = new ArrayList<>();
+		productDetailsDtoList.forEach(product -> {
+			productDetailsList.add(toEntity(product));
+		});
+		return productDetailsList;
 	}
 }
