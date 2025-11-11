@@ -1,0 +1,246 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "novamart-service": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss",
+          "changeDetection": "OnPush"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-builders/custom-webpack:browser",
+          "options": {
+            "outputPath": "dist",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "aot": true,
+            "inlineStyleLanguage": "scss",
+            "styles": [
+              "src/styles.scss",
+              "node_modules/@aposin/ng-aquila/css/normalize.css",
+              "node_modules/@allianz/ngx-ndbx/css/ndbx-base.css",
+              "node_modules/@allianz/ngx-ndbx/css/themes/ndbx-expert.css",
+              "node_modules/@aposin/ng-aquila/css/compatibility.css",
+              "node_modules/@aposin/ng-aquila/css/utilities.css",
+             "node_modules/ag-grid-enterprise/styles/ag-theme-alpine.css",
+             "node_modules/@aposin/ng-aquila/themes/ag-theme-aquila.css"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "projects/novamart/src/assets/styles",
+                "node_modules"
+              ]
+            },
+            "scripts": [],
+            "commonChunk": true,
+            "allowedCommonJsDependencies": [
+              "dayjs",
+              "iban",
+              "i18n-iso-countries",
+              "@allianz/tracking"
+            ],
+            "customWebpackConfig": {
+              "path": "webpack.base.config.ts",
+              "replaceDuplicatePlugins": true
+            },
+            "assets": [
+              "src/assets",
+              "src/favicon.ico",
+              "src/navigation-alternative.json"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "5mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "5mb",
+                  "maximumError": "5mb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all",
+              "customWebpackConfig": {
+                "path": "webpack.prod.config.ts"
+              }
+            },
+
+            "wc-dev": {
+              "customWebpackConfig": {
+                "path": "webpack.wc-dev.config.ts"
+              },
+              "buildOptimizer": false,
+              "optimization": true,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev.ts"
+                }
+              ]
+            },
+            "dev": {
+              "customWebpackConfig": {
+                "path": "webpack.dev.config.ts"
+              },
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-builders/custom-webpack:dev-server",
+          "options": {
+            "browserTarget": "novamart-service:build:development",
+            "publicHost": "http://localhost:4202",
+            "port": 4202
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "novamart-service:build:production"
+            },
+            "wc-dev": {
+              "browserTarget": "novamart-service:build:wc-dev",
+              "publicHost": "http://localhost:4202",
+              "port": 4202
+            },
+            "dev": {
+              "browserTarget": "novamart-service:build:dev",
+              "publicHost": "http://localhost:4200",
+              "port": 4200
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "extract-i18n": {
+          "builder": "@angular-builders/custom-webpack:extract-i18n",
+          "options": {
+            "browserTarget": "novamart-service:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-builders/custom-webpack:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "codeCoverage": true,
+            "codeCoverageExclude": ["src/app/tests/**"],
+            "inlineStyleLanguage": "scss",
+            "assets": ["src/assets", "src/favicon.ico"],
+            "styles": [
+              "src/styles.scss",
+              "node_modules/@aposin/ng-aquila/css/normalize.css",
+              "node_modules/@allianz/ngx-ndbx/css/ndbx-base.css",
+              "node_modules/@allianz/ngx-ndbx/css/themes/ndbx-expert.css",
+              "node_modules/@aposin/ng-aquila/css/compatibility.css",
+              "node_modules/@aposin/ng-aquila/css/utilities.css",
+              "node_modules/ag-grid-enterprise/styles/ag-theme-alpine.css",
+               "node_modules/@aposin/ng-aquila/themes/ag-theme-aquila.css"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "projects/novamart/src/assets/styles",
+                "node_modules"
+              ]
+            },
+            "scripts": [],
+            "customWebpackConfig": {
+              "path": "webpack.base.config.ts",
+              "replaceDuplicatePlugins": true
+            }
+          }
+        }
+      }
+    },
+    "novamart": {
+      "projectType": "library",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss",
+          "changeDetection": "OnPush"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "projects/novamart",
+      "sourceRoot": "projects/novamart/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+
+          "options": {
+            "project": "projects/novamart/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/novamart/tsconfig.lib.prod.json"
+            },
+            "wc-dev": {
+              "tsConfig": "projects/novamart/tsconfig.lib.json"
+            },
+            "dev": {
+              "tsConfig": "projects/novamart/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-builders/custom-webpack:karma",
+          "options": {
+            "main": "projects/novamart/src/test.ts",
+            "tsConfig": "projects/novamart/tsconfig.spec.json",
+            "karmaConfig": "projects/novamart/karma.conf.js",
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "projects/novamart/src/assets/styles",
+                "node_modules"
+              ]
+            },
+            "customWebpackConfig": {
+              "path": "webpack.base.config.ts",
+              "replaceDuplicatePlugins": true
+            }
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": "61065bea-e9c4-4a25-a01f-69e3ceff3802"
+  }
+}
