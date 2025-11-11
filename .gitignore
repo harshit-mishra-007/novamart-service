@@ -1,4 +1,88 @@
-target/
-.classpath
-.project
-.settings/
+# Compiled output
+
+# FE
+/src
+/AGCS
+FE/coverage
+FE/dist
+FE/tmp
+FE/out-tsc
+FE/bazel-out
+
+# Node
+FE/node_modules
+FE/npm-debug.log
+FE/yarn-error.log
+
+# IDEs and editors
+FE/.idea/
+FE/.project
+FE/.classpath
+FE/.c9/
+FE/*.launch
+FE/.settings/
+FE/*.sublime-workspace
+
+# Visual Studio Code
+FE/.vscode/*
+FE/!.vscode/settings.json
+FE/!.vscode/tasks.json
+FE/!.vscode/launch.json
+FE/!.vscode/extensions.json
+FE/.history/*
+
+# Miscellaneous
+FE/.angular/cache
+FE/.sass-cache/
+FE/connect.lock
+FE/unit-test
+FE/libpeerconnection.log
+FE/testem.log
+FE/typings
+FE/.scannerwork/
+FE/reports
+
+# System files
+FE/.DS_Store
+FE/Thumbs.db
+
+
+# BE
+ฺBE/src/main/resources/static/
+BE/HELP.md
+BE/target/
+BE/!.mvn/wrapper/maven-wrapper.jar
+BE/!**/src/main/**/target/
+BE/!**/src/test/**/target/
+BE/bin/
+
+### STS ###
+BE/.apt_generated
+BE/.classpath
+BE/.factorypath
+BE/.project
+BE/.settings
+BE/.springBeans
+BE/.sts4-cache
+
+### IntelliJ IDEA ###
+BE/.idea
+BE/*.iws
+BE/*.iml
+BE/*.ipr
+
+### NetBeans ###
+BE/nbproject/private/
+BE/nbbuild/
+BE/dist/
+BE/nbdist/
+BE/.nb-gradle/
+BE/build/
+BE/!**/src/main/**/build/
+BE/!**/src/test/**/build/
+
+### VS Code ###
+BE/.vscode/
+
+### IntelliJ ###
+.idea
