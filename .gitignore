@@ -8,6 +8,7 @@ FE/dist
 FE/tmp
 FE/out-tsc
 FE/bazel-out
+FE/package-lock.json
 
 # Node
 FE/node_modules
@@ -26,7 +27,7 @@ FE/*.sublime-workspace
 # Visual Studio Code
 FE/.vscode/*
 FE/!.vscode/settings.json
-FE/!.vscode/tasks.json
+.vscode/tasks.json
 FE/!.vscode/launch.json
 FE/!.vscode/extensions.json
 FE/.history/*

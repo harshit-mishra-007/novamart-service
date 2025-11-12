@@ -1,6 +1,15 @@
 {
   "name": "novamart-service",
   "version": "1.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve --configuration dev",
+    "build": "ng build",
+    "build:prod": "ng build --configuration production",
+    "watch": "ng build --watch --configuration dev",
+    "test": "ng test",
+    "lint": "ng lint"
+  },
   "dependencies": {
     "@angular/animations": "^19.2.14",
     "@angular/cdk": "19.2.19",
