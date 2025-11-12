@@ -1,0 +1,146 @@
+<div class="container">
+    <div class="page-header">
+        <h1>{{ isNewProduct ? 'Add New Product' : (isEditMode ? 'Edit Product' : 'Product Details') }}</h1>
+        <div class="header-actions">
+            <button class="btn btn-secondary"
+                    (click)="cancel()">
+                ← Back to List
+            </button>
+        </div>
+    </div>
+
+    <div *ngIf="error"
+         class="error">
+        {{ error }}
+    </div>
+
+    <div *ngIf="successMessage"
+         class="success">
+        {{ successMessage }}
+    </div>
+
+    <div *ngIf="loading"
+         class="loading">
+        Loading...
+    </div>
+
+    <div *ngIf="!loading"
+         class="card">
+        <form [formGroup]="productForm"
+              (ngSubmit)="onSubmit()">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="productId">Product ID *</label>
+                    <input type="text"
+                           id="productId"
+                           formControlName="productId"
+                           [class.error-border]="productForm.get('productId')?.invalid && productForm.get('productId')?.touched" />
+                    <span class="error-text"
+                          *ngIf="productForm.get('productId')?.invalid && productForm.get('productId')?.touched">
+                        Product ID is required
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Name *</label>
+                    <input type="text"
+                           id="name"
+                           formControlName="name"
+                           [class.error-border]="productForm.get('name')?.invalid && productForm.get('name')?.touched" />
+                    <span class="error-text"
+                          *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched">
+                        Name is required
+                    </span>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="description">Description *</label>
+                    <textarea id="description"
+                              formControlName="description"
+                              rows="4"
+                              [class.error-border]="productForm.get('description')?.invalid && productForm.get('description')?.touched"></textarea>
+                    <span class="error-text"
+                          *ngIf="productForm.get('description')?.invalid && productForm.get('description')?.touched">
+                        Description is required
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <label for="price">Price *</label>
+                    <input type="number"
+                           id="price"
+                           formControlName="price"
+                           step="0.01"
+                           [class.error-border]="productForm.get('price')?.invalid && productForm.get('price')?.touched" />
+                    <span class="error-text"
+                          *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched">
+                        Price must be 0 or greater
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Category *</label>
+                    <input type="text"
+                           id="category"
+                           formControlName="category"
+                           [class.error-border]="productForm.get('category')?.invalid && productForm.get('category')?.touched" />
+                    <span class="error-text"
+                          *ngIf="productForm.get('category')?.invalid && productForm.get('category')?.touched">
+                        Category is required
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <label for="stock">Stock *</label>
+                    <input type="number"
+                           id="stock"
+                           formControlName="stock"
+                           [class.error-border]="productForm.get('stock')?.invalid && productForm.get('stock')?.touched" />
+                    <span class="error-text"
+                          *ngIf="productForm.get('stock')?.invalid && productForm.get('stock')?.touched">
+                        Stock must be 0 or greater
+                    </span>
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <label>
+                        <input type="checkbox"
+                               formControlName="active" />
+                        Active
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit"
+                        class="btn btn-primary"
+                        *ngIf="isEditMode"
+                        [disabled]="productForm.invalid || loading">
+                    {{ isNewProduct ? 'Create Product' : 'Save Changes' }}
+                </button>
+
+                <button type="button"
+                        class="btn btn-secondary"
+                        *ngIf="!isNewProduct && !isEditMode"
+                        (click)="toggleEditMode()">
+                    Edit Product
+                </button>
+
+                <button type="button"
+                        class="btn btn-secondary"
+                        *ngIf="!isNewProduct && isEditMode"
+                        (click)="toggleEditMode()">
+                    Cancel Edit
+                </button>
+
+                <button type="button"
+                        class="btn btn-danger"
+                        *ngIf="!isNewProduct"
+                        (click)="deleteProduct()"
+                        [disabled]="loading">
+                    Delete Product
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
