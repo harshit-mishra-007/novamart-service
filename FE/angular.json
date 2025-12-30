@@ -1,17 +1,37 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
+  "cli": {
+    "packageManager": "npm"
+  },
   "newProjectRoot": "projects",
   "projects": {
-    "novamart-service": {
+    "novamart-fe": {
       "projectType": "application",
       "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss",
-          "changeDetection": "OnPush"
+        "@schematics/angular:class": {
+          "skipTests": true
         },
-        "@schematics/angular:application": {
-          "strict": true
+        "@schematics/angular:component": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:interceptor": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:resolver": {
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
         }
       },
       "root": "",
@@ -19,143 +39,65 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular/build:application",
           "options": {
-            "outputPath": "dist",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": ["zone.js"],
+            "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
-            "styles": [
-              "src/styles.scss",
-              "node_modules/ag-grid-enterprise/styles/ag-theme-alpine.css"
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
             ],
-            "scripts": [],
-            "assets": ["src/assets", "src/favicon.ico"]
+            "styles": ["src/styles.scss"]
           },
           "configurations": {
             "production": {
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "5mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "5mb",
-                  "maximumError": "5mb"
-                }
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
                 }
               ],
               "outputHashing": "all"
             },
-            "dev": {
-              "buildOptimizer": false,
+            "development": {
               "optimization": false,
-              "sourceMap": true,
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.dev.ts"
-                }
-              ]
+              "extractLicenses": false,
+              "sourceMap": true
             }
           },
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular/build:dev-server",
           "options": {
-            "buildTarget": "novamart-service:build:dev",
-            "port": 4200
+            "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {
-              "buildTarget": "novamart-service:build:production"
+              "buildTarget": "novamart-fe:build:production"
             },
-            "dev": {
-              "buildTarget": "novamart-service:build:dev"
+            "development": {
+              "buildTarget": "novamart-fe:build:development"
             }
           },
-          "defaultConfiguration": "dev"
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "buildTarget": "novamart-service:build"
-          }
+          "defaultConfiguration": "development"
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:unit-test",
           "options": {
-            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
-            "codeCoverage": true,
-            "inlineStyleLanguage": "scss",
-            "assets": ["src/assets", "src/favicon.ico"],
-            "styles": [
-              "src/styles.scss",
-              "node_modules/ag-grid-enterprise/styles/ag-theme-alpine.css"
-            ],
-            "scripts": []
-          }
-        }
-      }
-    },
-    "novamart": {
-      "projectType": "library",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss",
-          "changeDetection": "OnPush"
-        },
-        "@schematics/angular:application": {
-          "strict": true
-        }
-      },
-      "root": "projects/novamart",
-      "sourceRoot": "projects/novamart/src",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular/build:ng-packagr",
-
-          "options": {
-            "project": "projects/novamart/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/novamart/tsconfig.lib.prod.json"
-            },
-            "wc-dev": {
-              "tsConfig": "projects/novamart/tsconfig.lib.json"
-            },
-            "dev": {
-              "tsConfig": "projects/novamart/tsconfig.lib.json"
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "polyfills": ["zone.js", "zone.js/testing"],
-            "tsConfig": "projects/novamart/tsconfig.spec.json",
-            "karmaConfig": "projects/novamart/karma.conf.js"
+            "watch": false
           }
         }
       }
     }
-  },
-  "cli": {
-    "analytics": "61065bea-e9c4-4a25-a01f-69e3ceff3802"
   }
 }
