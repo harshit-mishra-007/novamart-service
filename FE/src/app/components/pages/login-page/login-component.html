@@ -1,0 +1,79 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <h1>Novamart</h1>
+      <p class="subtitle">Welcome back!</p>
+    </div>
+
+    <div class="mode-toggle">
+      <label class="label-header">
+        Login
+      </label>
+    </div>
+
+    <form [formGroup]="authForm" (ngSubmit)="onSubmit()" class="auth-form">
+
+      <div class="form-content">
+          <div class="form-group">
+            <label for="loginEmail">Email</label>
+            <input 
+              id="loginEmail"
+              type="email" 
+              formControlName="email" 
+              placeholder="Enter your email"
+              [class.error]="authForm.get('email')?.invalid && authForm.get('email')?.touched">
+            @if (authForm.get('email')?.invalid && authForm.get('email')?.touched) {
+              <div class="error-message">
+                @if (authForm.get('email')?.errors?.['required']) {
+                  <span>Email is required</span>
+                }
+                @if (authForm.get('email')?.errors?.['email']) {
+                  <span>Invalid email format</span>
+                }
+              </div>
+            }
+          </div>
+
+          <div class="form-group">
+            <label for="loginPassword">Password</label>
+            <input 
+              id="loginPassword"
+              type="password" 
+              formControlName="password" 
+              placeholder="Enter your password"
+              [class.error]="authForm.get('password')?.invalid && authForm.get('password')?.touched">
+            @if (authForm.get('password')?.invalid && authForm.get('password')?.touched) {
+              <div class="error-message">
+                @if (authForm.get('password')?.errors?.['required']) {
+                  <span>Password is required</span>
+                }
+              </div>
+            }
+          </div>
+        </div>
+
+      @if (errorMessage) {
+        <div class="alert alert-error">
+          {{ errorMessage }}
+        </div>
+      }
+      @if (successMessage) {
+        <div class="alert alert-success">
+          {{ successMessage }}
+        </div>
+      }
+      
+      <button 
+        type="submit" 
+        class="submit-btn"
+        [disabled]="authForm.invalid || isLoading">
+        @if (!isLoading) {
+          <span>Login</span>
+        }
+        @if (isLoading) {
+          <span class="loading-spinner">Processing...</span>
+        }
+      </button>
+    </form>
+  </div>
+</div>

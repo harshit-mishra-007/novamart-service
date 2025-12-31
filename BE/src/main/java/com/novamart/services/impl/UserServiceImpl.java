@@ -12,6 +12,8 @@ import com.novamart.exceptions.ServiceException;
 import com.novamart.mappers.impl.UserMapper;
 import com.novamart.repositories.UsersRepository;
 import com.novamart.services.UserService;
+import com.novamart.services.ValidationService;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -19,23 +21,25 @@ import lombok.extern.slf4j.Slf4j;
 public class UserServiceImpl implements UserService {
 	
 	private final UsersRepository userRepository;
+	private final ValidationService validationService;
 	private final UserMapper mapper;
-	@Value("${username.not.available}")
-	private String userNameNotFound;
+	@Value("${email.not.available}")
+	private String emailNotFound;
 	
-	public UserServiceImpl(UsersRepository userRepository, UserMapper mapper) {
+	public UserServiceImpl(UsersRepository userRepository, ValidationService validationService, UserMapper mapper) {
 		this.userRepository = userRepository;
+		this.validationService = validationService;
 		this.mapper = mapper;
 	}
 	
 	@Override
-	public UserDetailsDto fetchUserDetailsByUsername(String username) {
-		UserDetails userDetails = userRepository.fetchUserDetailsByUsername(username);
+	public UserDetailsDto fetchUserDetailsByEmail(String email) {
+		UserDetails userDetails = userRepository.fetchUserDetailsByEmail(email);
 		if (!ObjectUtils.isEmpty(userDetails)) {
-			log.info("Fetched User with Username {}", username);
+			log.info("Fetched User with Email {}", email);
 			return mapper.toDto(userDetails);
 		} else
-			throw new ServiceException(HttpStatus.NOT_FOUND, MessageFormat.format(userNameNotFound, username));
+			throw new ServiceException(HttpStatus.NOT_FOUND, MessageFormat.format(emailNotFound, email));
 	}
 
 	@Override
@@ -45,6 +49,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserDetailsDto createOrUpdateUser(UserDetailsDto userDetailsDto) {
+		validationService.validateUser(userDetailsDto);
 		log.info("Creating new user with username {}", userDetailsDto.getUsername());
 		UserDetails userDetails = mapper.toEntity(userDetailsDto);
 		UserDetails savedUser = userRepository.save(userDetails);

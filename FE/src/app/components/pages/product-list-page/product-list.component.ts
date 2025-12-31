@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../../environments/environment';
 import { Product, ProductService } from '../../services/product.service';
 
 @Component({

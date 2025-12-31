@@ -35,10 +35,10 @@ public class UserController {
 		return ResponseEntity.ok(userDetailsList);
 	}
 	
-	@GetMapping("/users/{username}")
-	public ResponseEntity<UserDetailsDto> fetchUserDetailsByUsername(@PathVariable String username) {
-		log.info("Fetching user detail by username {},", username);
-		UserDetailsDto response = userService.fetchUserDetailsByUsername(username);
+	@GetMapping("/users/{email}")
+	public ResponseEntity<UserDetailsDto> fetchUserDetailsByEmail(@PathVariable String email) {
+		log.info("Fetching user detail by email {},", email);
+		UserDetailsDto response = userService.fetchUserDetailsByEmail(email);
 		return ResponseEntity.ok(response);
 	}
 	

@@ -1,0 +1,16 @@
+<h1 style="text-align:center">Novamart</h1>
+<p><a routerLink="/products">products</a></p>
+@if(loading){
+  <p>Loading...</p>
+}
+@else if (!loading && error) {
+  <h3>No product found.</h3>
+}
+@else if(!loading && !error){
+  @if(product){
+    <h2>{{ product.name}}</h2>
+    <p>Price: {{ product.price | currency }}</p>
+    <p>Description: {{ product.description }}</p>
+    <p><a routerLink="/products">Back to products</a></p>
+  }
+}
