@@ -1,7 +1,9 @@
 import { Routes } from "@angular/router";
-import { NotFoundComponent } from './components/not-found/not-found.component';
-import { ProductDetailComponent } from './components/product-detail/product-detail.component';
-import { ProductListComponent } from './components/product-list/product-list.component';
+import { LoginComponent } from "./components/pages/login-page/login-component";
+import { NotFoundComponent } from './components/pages/not-found-page/not-found.component';
+import { ProductDetailComponent } from './components/pages/product-details-page/product-detail.component';
+import { ProductListComponent } from './components/pages/product-list-page/product-list.component';
+import { RegisterComponent } from "./components/pages/register-page/register-component";
 
 export const routes: Routes = [
   {
@@ -16,6 +18,14 @@ export const routes: Routes = [
   {
     path: 'products/:productId',
     component: ProductDetailComponent,
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
   },
   {
     path: '**',

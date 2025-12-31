@@ -1,0 +1,242 @@
+<div class="register-container">
+  <div class="register-card">
+    <div class="register-header">
+      <h1>Novamart</h1>
+      <p class="subtitle">Create your account</p>
+    </div>
+
+    <div class="mode-toggle">
+      <label class="label-header">
+        Register
+      </label>
+    </div>
+
+    <form [formGroup]="authForm" (ngSubmit)="onSubmit()" class="auth-form">
+      <div class="form-content">
+        <div class="form-group">
+          <label for="registerUsername">Username</label>
+          <input 
+            id="registerUsername"
+            type="text" 
+            formControlName="username" 
+            placeholder="Choose a username"
+            [class.error]="authForm.get('username')?.invalid && authForm.get('username')?.touched">
+            @if (authForm.get('username')?.invalid && authForm.get('username')?.touched) {
+              <div class="error-message">
+                @if (authForm.get('username')?.errors?.['required']) {
+                  <span>Username is required</span>
+                }
+                @if (authForm.get('username')?.errors?.['minlength']) {
+                  <span>Username must be at least 3 characters</span>
+                }
+              </div>
+            }
+        </div>
+
+        <div class="form-group">
+          <label for="registerEmail">Email</label>
+          <input 
+            id="registerEmail"
+            type="email" 
+            formControlName="email" 
+            placeholder="Enter your email"
+            [class.error]="authForm.get('email')?.invalid && authForm.get('email')?.touched">
+          @if (authForm.get('email')?.invalid && authForm.get('email')?.touched) {
+            <div class="error-message">
+              @if (authForm.get('email')?.errors?.['required']) {
+                <span>Email is required</span>
+              }
+              @if (authForm.get('email')?.errors?.['email']) {
+                <span>Invalid email format</span>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="registerPassword">Password</label>
+          <input 
+            id="registerPassword"
+            type="password" 
+            formControlName="password" 
+            placeholder="Create a password"
+            [class.error]="authForm.get('password')?.invalid && authForm.get('password')?.touched">
+          @if (authForm.get('password')?.invalid && authForm.get('password')?.touched) {
+            <div class="error-message">
+              @if (authForm.get('password')?.errors?.['required']) {
+                <span>Password is required</span>
+              }
+              @if (authForm.get('password')?.errors?.['minlength']) {
+                <span>Password must be at least 6 characters</span>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input 
+            id="confirmPassword"
+            type="password" 
+            formControlName="confirmPassword" 
+            placeholder="Re-enter your password"
+            [class.error]="authForm.get('confirmPassword')?.invalid && authForm.get('confirmPassword')?.touched">
+          @if (authForm.get('confirmPassword')?.invalid && authForm.get('confirmPassword')?.touched) {
+            <div class="error-message">
+              @if (authForm.get('confirmPassword')?.errors?.['required']) {
+                <span>Please confirm your password</span>
+              }
+            </div>
+          }
+          @if (authForm.errors?.['passwordMismatch'] && authForm.get('confirmPassword')?.touched) {
+            <div class="error-message">
+              <span>Passwords do not match</span>
+            </div>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="userType">User Type</label>
+          <select 
+            id="userType"
+            formControlName="userType"
+            [class.error]="authForm.get('userType')?.invalid && authForm.get('userType')?.touched">
+            <option value="" disabled selected>Select user type</option>
+            <option value="buyer">Buyer</option>
+            <option value="seller">Seller</option>
+          </select>
+          @if (authForm.get('userType')?.invalid && authForm.get('userType')?.touched) {
+            <div class="error-message">
+              @if (authForm.get('userType')?.errors?.['required']) {
+                <span>User type is required</span>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="registerStreet">Street</label>
+          <input 
+            id="registerStreet"
+            type="text" 
+            formControlName="street" 
+            placeholder="Enter your street"
+            [class.error]="authForm.get('street')?.invalid && authForm.get('street')?.touched">
+            @if (authForm.get('street')?.invalid && authForm.get('street')?.touched) {
+              <div class="error-message">
+                @if (authForm.get('street')?.errors?.['required']) {
+                  <span>Street is required</span>
+                }
+                @if (authForm.get('street')?.errors?.['minlength']) {
+                  <span>Street must be at least 3 characters</span>
+                }
+              </div>
+            }
+        </div>
+
+        <div class="form-group">
+          <label for="registerCity">City</label>
+          <input 
+            id="registerCity"
+            type="text" 
+            formControlName="city" 
+            placeholder="Enter your city"
+            [class.error]="authForm.get('city')?.invalid && authForm.get('city')?.touched">
+            @if (authForm.get('city')?.invalid && authForm.get('city')?.touched) {
+              <div class="error-message">
+                @if (authForm.get('city')?.errors?.['required']) {
+                  <span>City is required</span>
+                }
+                @if (authForm.get('city')?.errors?.['minlength']) {
+                  <span>City must be at least 3 characters</span>
+                }
+              </div>
+            }
+        </div>
+
+        <div class="form-group">
+          <label for="registerState">State</label>
+          <input 
+            id="registerState"
+            type="text" 
+            formControlName="state" 
+            placeholder="Enter your state"
+            [class.error]="authForm.get('state')?.invalid && authForm.get('state')?.touched">
+            @if (authForm.get('state')?.invalid && authForm.get('state')?.touched) {
+              <div class="error-message">
+                @if (authForm.get('state')?.errors?.['required']) {
+                  <span>State is required</span>
+                }
+                @if (authForm.get('state')?.errors?.['minlength']) {
+                  <span>State must be at least 3 characters</span>
+                }
+              </div>
+            }
+        </div>
+
+        <div class="form-group">
+          <label for="registerCountry">Country</label>
+          <input 
+            id="registerCountry"
+            type="text" 
+            formControlName="country" 
+            placeholder="Enter your country"
+            [class.error]="authForm.get('country')?.invalid && authForm.get('country')?.touched">
+            @if (authForm.get('country')?.invalid && authForm.get('country')?.touched) {
+              <div class="error-message">
+                @if (authForm.get('country')?.errors?.['required']) {
+                  <span>Country is required</span>
+                }
+                @if (authForm.get('country')?.errors?.['minlength']) {
+                  <span>Country must be at least 3 characters</span>
+                }
+              </div>
+            }
+        </div>
+
+        <div class="form-group">
+          <label for="registerZipCode">Country</label>
+          <input 
+            id="registerZipCode"
+            type="text" 
+            formControlName="zipCode" 
+            placeholder="Enter your zip code"
+            [class.error]="authForm.get('zipCode')?.invalid && authForm.get('zipCode')?.touched">
+            @if (authForm.get('zipCode')?.invalid && authForm.get('zipCode')?.touched) {
+              <div class="error-message">
+                @if (authForm.get('zipCode')?.errors?.['required']) {
+                  <span>Zip code is required</span>
+                }
+                @if (authForm.get('zipCode')?.errors?.['minlength']) {
+                  <span>Zip code must be at least 3 characters</span>
+                }
+              </div>
+            }
+        </div>
+        </div>
+
+      @if (errorMessage) {
+        <div class="alert alert-error">
+          {{ errorMessage }}
+        </div>
+      }
+      @if (successMessage) {
+        <div class="alert alert-success">
+          {{ successMessage }}
+        </div>
+      }
+      
+      <button 
+        type="submit" 
+        class="submit-btn"
+        [disabled]="authForm.invalid || isLoading">
+        @if (!isLoading) {
+          <span>Register</span>
+        }
+        @if (isLoading) {
+          <span class="loading-spinner">Processing...</span>
+        }
+      </button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<h1>Novamart</h1>
+@if(loading){
+  <p>Loading...</p>
+}
+@else if (!loading && error) {
+  <p>{{ error }}</p>
+}
+@else {
+  <ul>
+    @if(products.length === 0){
+      <h3>No products found.</h3>
+    }
+    @for (product of products; track $index) {
+      <li>
+        <a [routerLink]="['/products', product.productId]">
+          {{ product.name || product.productId || product.id }}
+        </a>
+      </li>
+    }
+  </ul>
+}
